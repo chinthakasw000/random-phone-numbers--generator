@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Phone Number Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        #phone-number {
+            font-size: 20px;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Phone Number Generator</h1>
+        <div id="phone-number">Click "Generate" to get a number</div>
+        <button onclick="generatePhoneNumber()">Generate Number</button>
+        <button onclick="copyPhoneNumber()">Copy Number</button>
+    </div>
+
+    <script>
+        function generatePhoneNumber() {
+            // Generate a random Sri Lankan phone number with the format 07X-XXXXXXX
+            const prefixes = ["70", "71", "72", "75", "76", "77", "78"]; // Common prefixes in Sri Lanka
+            const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            const randomNumber = "0" + randomPrefix + Math.floor(1000000 + Math.random() * 9000000).toString();
+            document.getElementById('phone-number').textContent = randomNumber;
+        }
+
+        function copyPhoneNumber() {
+            const phoneNumber = document.getElementById('phone-number').textContent;
+            if (phoneNumber && phoneNumber !== "Click \"Generate\" to get a number") {
+                navigator.clipboard.writeText(phoneNumber).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
